@@ -1,0 +1,9 @@
+{
+  "name": "e-commerce-app",
+  "runtime": "node/v18",
+  "region": "US",
+  "envs": [
+    "ACCESS_TOKEN"
+  ],
+  "typescript": true
+}
