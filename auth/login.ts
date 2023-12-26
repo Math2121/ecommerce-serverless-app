@@ -9,6 +9,8 @@ import { findUserByEmail, saveUser } from '../repository/user/userRepository';
 
 import dotenv from 'dotenv'; 
 dotenv.config();
+
+
 export default async function (params: any, context: any) {
   const {email, password} = params
 
@@ -30,7 +32,7 @@ export default async function (params: any, context: any) {
     return {"message":"email or password is not valid"}
     
   }
-console.log(user)
+
   const token = jwt.sign(
     {
       "_id": user._id,
