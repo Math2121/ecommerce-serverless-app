@@ -19,10 +19,21 @@ export async function findUserByEmail(email:string):Promise<any>{
   return user
 }
 
-export async function saveUser(current: any):Promise<any>{
+export async function saveUser(current: any):Promise<void>{
   await userTable.save(current)
 
 }
+
+export async function deleteUser(id:string):Promise<void>{
+ const user = await userTable
+    .where({_id:id})
+    .findOne() 
+ await userTable.delete(user)
+
+}
+
+
+
 
 
 
