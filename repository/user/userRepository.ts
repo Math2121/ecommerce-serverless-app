@@ -18,6 +18,15 @@ export async function findUserByEmail(email:string):Promise<any>{
 
   return user
 }
+export async function findUserByID(_id:string):Promise<any>{
+ const user = await userTable
+    .where({_id})
+    .projection({isAdmin:0, password: 0, accessToken: 0})
+    .findOne() 
+
+  return user
+}
+
 
 export async function saveUser(current: any):Promise<void>{
   await userTable.save(current)

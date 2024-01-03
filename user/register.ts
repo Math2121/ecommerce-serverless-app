@@ -5,8 +5,6 @@ import { countUsers } from '../repository/user/userRepository';
 
 
 export default async function (params: any, context: any) {
-  console.log('Received params:', params);
-  console.log('Received context:', context);
 
   const {name, email, password} = params
 
