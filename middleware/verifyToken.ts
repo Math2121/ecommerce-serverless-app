@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 interface User {
   _id: string
-  isAdmin: true
+  isAdmin: boolean
 }
 
 export default async function (context: any): Promise<User | undefined> {
