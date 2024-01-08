@@ -1,41 +1,34 @@
 // @see https://docs.aircode.io/guide/functions/
 import aircode from 'aircode';
 import verifyToken from '../middleware/verifyToken';
-import { saveProduct } from '../repository/product/productRepository';
+import { findProductByID, saveProduct } from '../repository/product/productRepository';
 
 export default async function (params: any, context: any) {
+  
   const tokenUser = await verifyToken(context)
-
-  if(!tokenUser || !tokenUser?.isAdmin){
+   if(!tokenUser || !tokenUser?.isAdmin){
     context.status(422)
     return {
       "message": "User is not allowed"
     }
   }
 
-  const {title, description, inStock,category,price,color,size} = params
+  const {_id, title, description, inStock,category,price,color, size} = params
 
-  if(!title || !description || !price){
-    context.status(400)
-    return {
-      "message":"Missing mandatory attributes"
-    }
-  }
-
-
-  try{
-    const result = await saveProduct(params)
+    try{
+    const product = await findProductByID(_id)
+      
     
-    if(result === null){
+    if(product === null){
       context.status(422)
       return {
-      "message":"Product already exist"
+      "message":"Product not exist"
       }
    }
-
+    await saveProduct(params)
     context.status(201)
     return {
-      "message":"Product created"
+      "message":"Product updated"
     }
   }catch(err:any){
     context.status(500)
